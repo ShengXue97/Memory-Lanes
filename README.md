@@ -1,4 +1,6 @@
 # Memory-Lanes
+IMPORTANT: Use Unity 2019.2.19f1
+
 *Introduction:*
 
 Memory Lanes is a puzzle game where the player leads the character through mazes with walls and non-player characters (NPCs) while manipulating the state of the world around them to reach the goal.
