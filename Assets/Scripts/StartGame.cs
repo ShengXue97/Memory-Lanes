@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartMenu : MonoBehaviour
+public class StartGame : MonoBehaviour
 {
     [SerializeField]
     private string nextSceneName;
