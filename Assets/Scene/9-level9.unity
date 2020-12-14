@@ -2932,7 +2932,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.98
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2955,13 +2955,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157545136}
-  m_LocalRotation: {x: 0.3083571, y: 0.35843933, z: -0.12674917, w: 0.871993}
-  m_LocalPosition: {x: -14.550024, y: 23.72831, z: -26.066849}
+  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: 11.98, y: 10, z: -11.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
 --- !u!1001 &161855612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3624,17 +3624,17 @@ PrefabInstance:
     - target: {fileID: 2120104037793316311, guid: c1e82f736e1d240f0a98d2eaa08559e5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.1
+      value: 7.2
       objectReference: {fileID: 0}
     - target: {fileID: 2120104037793316311, guid: c1e82f736e1d240f0a98d2eaa08559e5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 13.39
       objectReference: {fileID: 0}
     - target: {fileID: 2120104037793316311, guid: c1e82f736e1d240f0a98d2eaa08559e5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.5
+      value: -19.53
       objectReference: {fileID: 0}
     - target: {fileID: 2120104037793316311, guid: c1e82f736e1d240f0a98d2eaa08559e5,
         type: 3}
@@ -6162,7 +6162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1417160771, guid: ebf059938e17e4b47b9d03809ec35b95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 56.648
+      value: 56.647995
       objectReference: {fileID: 0}
     - target: {fileID: 1565793964, guid: ebf059938e17e4b47b9d03809ec35b95, type: 3}
       propertyPath: m_AnchoredPosition.y
