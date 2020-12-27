@@ -16,90 +16,106 @@ public class PlayerMovement : MonoBehaviour
     public NavMeshAgent agent;
     public Joystick joystick;
     public SaveLoadIndicator control;
+
+    public Transform movePoint;
+    public LayerMask whatStopsMovement;
+
+    private bool canMoveHorizontal = true;
+    private bool canMoveVertical = true;
+    private float currentTime;
     // Use this for initialization
     void Start()
     {
         control = FindObjectOfType<SaveLoadIndicator>();
         agent = GetComponent<NavMeshAgent>();
         joystick = FindObjectOfType<Joystick>();
+
+        currentTime = -999f;
+        movePoint.parent = null;
     }
 
     //Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyUp("o"))
         {
             control.Save();
-        } else if (Input.GetKeyUp("p"))
+        }
+        else if (Input.GetKeyUp("p"))
         {
             control.Load();
         }
 
-        // if (Input.GetMouseButtonDown(0)) {
-        //     Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //     RaycastHit hitInfo;
-
-        //     if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn)) {
-        //         agent.SetDestination(hitInfo.point);
-        //     }
-        // }
 
         print(joystick.Horizontal + ";" + joystick.Vertical);
-        
-        if (1 == 1){
-            if (Input.GetKey("w"))
-            {
-                moveUp(1f);
-            }
-            else if (Input.GetKey("s"))
-            {
-                moveDown(-1f);    
-            }
+        float pointer_x = Input.GetAxisRaw("Horizontal");
+        float pointer_y = Input.GetAxisRaw("Vertical");
+        // if (Mathf.Abs(joystick.Horizontal) > 0.2f)
+        // {
+        //     pointer_x = joystick.Horizontal;
+        // }
 
-            if (Input.GetKey("a") && !Input.GetKey("d"))
-            {
-                moveLeft(-1f);
-            }
-            else if (Input.GetKey("d") && !Input.GetKey("a"))
-            {
-                moveRight(1f);
-            }
-        } 
-        if (1 == 1) {
-            if (joystick.Vertical > 0.2f)
-            {
-                moveUp(joystick.Vertical);
-            }
-            else if (joystick.Vertical < -0.2f)
-            {
-                moveDown(joystick.Vertical);    
-            }
+        // if (Mathf.Abs(joystick.Vertical) > 0.2f)
+        // {
+        //     pointer_y = joystick.Vertical;
+        // }
 
-            if (joystick.Horizontal < -0.2f)
+        if (Mathf.Abs(pointer_x) == 0f)
+        {
+            //Prevents holding down arrow keys to move, must release
+            canMoveHorizontal = true;
+        }
+
+        if (Mathf.Abs(pointer_y) == 0f)
+        {
+            //Prevents holding down arrow keys to move, must release
+            canMoveVertical = true;
+        }
+
+        //Debug.Log(pointer_x + ";" + pointer_y);
+
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 20f * Time.deltaTime);
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05F)
+        {
+            if (Mathf.Abs(pointer_x) == 1f && canMoveHorizontal)
             {
-                moveLeft(joystick.Horizontal);
+                canMoveHorizontal = false;
+                if (Physics.OverlapSphere(movePoint.position + new Vector3(pointer_x * 1, 0f, 0f), 0.2f, whatStopsMovement).Length == 0)
+                {
+                    if (pointer_x == -1f)
+                    {
+                        gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
+                    }
+                    else
+                    {
+                        gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    }
+                    //anim.SetBool("Hop", true);
+                    movePoint.position += new Vector3(pointer_x, 0f, 0f);
+                }
             }
-            else if (joystick.Horizontal > 0.2f)
+            else if (Mathf.Abs(pointer_y) == 1f && canMoveVertical)
             {
-                moveRight(joystick.Horizontal);
+                canMoveVertical = false;
+                if (Physics.OverlapSphere(movePoint.position + new Vector3(0f, 0f, pointer_y * 1), 0.2f, whatStopsMovement).Length == 0)
+                {
+                    if (pointer_y == -1f)
+                    {
+                        gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    else
+                    {
+                        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    // anim.SetBool("Hop", true);
+                    movePoint.position += new Vector3(0f, 0f, pointer_y);
+                }
+            }
+            else
+            {
+                //anim.SetBool("Hop", false);
             }
         }
-    }
-
-    public void moveUp(float factor){
-        transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed * factor;
-    }
-
-    public void moveDown(float factor){
-        transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed * factor;
-    }
-
-    public void moveLeft(float factor){
-        transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed * factor;
-    }
-
-    public void moveRight(float factor){
-        transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed * factor;
     }
 
     public void saveState()
@@ -130,11 +146,12 @@ public class PlayerMovement : MonoBehaviour
 
             Debug.Log(i);
             Door doorScript = doors.transform.GetChild(i).GetComponent<Door>();
-            
+
             if (doorScript.isOpen && !doorStates[i])
             {
                 doorScript.Trigger();
-            } else if (!doorScript.isOpen && doorStates[i])
+            }
+            else if (!doorScript.isOpen && doorStates[i])
             {
                 doorScript.Trigger();
             }
@@ -163,22 +180,3 @@ public class PlayerMovement : MonoBehaviour
 
     }
 }
-
-    //public void OnTriggerEnter(Collider collider)
-    //{
-    //    Debug.Log("Enter trigger");
-    //    if (collider.tag == "Switch")
-    //    {
-    //        collider.enabled = false;
-    //    }
-    //}
-
-    //public void OnTriggerExit(Collider collider)
-    //{
-    //    Debug.Log("Exit trigger");
-    //    if (collider.tag == "Switch")
-    //    {
-    //        collider.enabled = true;
-    //    }
-    //}
-

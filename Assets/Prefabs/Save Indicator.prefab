@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2120104036851719523}
   - component: {fileID: 2120104036851719525}
   - component: {fileID: 2120104036851719522}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4764,7 +4764,7 @@ GameObject:
   - component: {fileID: 2120104037566826261}
   - component: {fileID: 2120104037566826263}
   - component: {fileID: 2120104037566826260}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9516,7 +9516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120104037793316311}
   - component: {fileID: 2120104037793316310}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Save Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9576,7 +9576,7 @@ GameObject:
   - component: {fileID: 2120104038038763779}
   - component: {fileID: 2120104038038763776}
   - component: {fileID: 2120104038038763777}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9776,7 +9776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120104038116452517}
   - component: {fileID: 2120104038116452516}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Top
   m_TagString: saveIndicator
   m_Icon: {fileID: 0}
@@ -9821,7 +9821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120104038229942090}
   - component: {fileID: 2120104038229942092}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Down
   m_TagString: loadIndicator
   m_Icon: {fileID: 0}
@@ -9956,7 +9956,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2e2fb75ae04b049e09f07523a4c2df75,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e2fb75ae04b049e09f07523a4c2df75, type: 3}
