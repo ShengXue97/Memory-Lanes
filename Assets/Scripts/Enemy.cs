@@ -12,13 +12,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }           
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (!isStuck)
-        rb.MovePosition(transform.position + directionVector.normalized * Time.deltaTime * movementSpeed);
+            rb.MovePosition(transform.position + directionVector.normalized * Time.deltaTime * movementSpeed);
         //transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
     }
 
