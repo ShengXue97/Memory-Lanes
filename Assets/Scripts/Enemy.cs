@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public Vector3 directionVector = Vector3.forward;
     public float movementSpeed = 5f;
     private Rigidbody rb;
-    private bool isStuck = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +17,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isStuck)
-            rb.MovePosition(transform.position + directionVector.normalized * Time.deltaTime * movementSpeed);
+        rb.MovePosition(transform.position + directionVector.normalized * Time.deltaTime * movementSpeed);
         //transform.Translate(directionVector.normalized * Time.deltaTime * movementSpeed);
     }
 
@@ -32,16 +31,17 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.tag == "aPlayer")
         {
-            isStuck = true;
+            directionVector.z *= -1; // bounce back on collision
+            directionVector.x *= -1;
         }
 
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "aPlayer")
+        /*if (collision.gameObject.tag == "aPlayer")
         {
             isStuck = false;
-        }
+        }*/
     }
 }
