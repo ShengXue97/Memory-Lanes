@@ -9610,6 +9610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8708152058757644042}
   - component: {fileID: 6876872214554776715}
+  - component: {fileID: 8654712497636370750}
   - component: {fileID: 2760758189534387839}
   - component: {fileID: 7616147729418158707}
   - component: {fileID: 2836875394462181590}
@@ -9650,6 +9651,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8654712497636370750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708152058757644046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9f12a426c54211a9998ab0b09abc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitingTime: 2
 --- !u!114 &2760758189534387839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9668,6 +9682,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7616147729418158707}
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8654712497636370750}
+        m_MethodName: FinishLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
