@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2756f224e65b46c6b909884bb34ee826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 0}
+  music: {fileID: 8300000, guid: 4c0a6c0ce5ee2460f842f446636a0aa7, type: 3}
   player: {fileID: 0}
   goal: {fileID: 0}
   saveLoadIndicator: {fileID: 1520790222640257104}
