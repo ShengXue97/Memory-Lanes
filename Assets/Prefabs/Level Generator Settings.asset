@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5d7f31b77c4c48803f6a9c6c845027, type: 3}
+  m_Name: Level Generator Settings
+  m_EditorClassIdentifier: 
+  levelPrefab: {fileID: 6175335793648686403, guid: fe3dda2cb4daa47f9bb6174f3dda6e5f,
+    type: 3}
+  tiles:
+  - type: 0
+    prefab: {fileID: 5682766037531836718, guid: 6765a141884544d15bbf3b1e4defbfc3,
+      type: 3}
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - type: 1
+    prefab: {fileID: 5682766037531836718, guid: 314dc14545167429083ff92b4a2dd444,
+      type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - type: 2
+    prefab: {fileID: 6842154799183300359, guid: d078a6c1b0d164ade9ec074e10324332,
+      type: 3}
+    color: {r: 0, g: 0, b: 1, a: 1}
+  - type: 3
+    prefab: {fileID: 8708152058757644046, guid: c594cc181a2da495e9334a2dde4b9456,
+      type: 3}
+    color: {r: 0, g: 1, b: 1, a: 1}
+  - type: 4
+    prefab: {fileID: 1631128290186582726, guid: b9db813ac78954c2f9fd40d65782a122,
+      type: 3}
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - type: 5
+    prefab: {fileID: 3138597220554374596, guid: 0ccc5c9bee87841b081070dae13e10dc,
+      type: 3}
+    color: {r: 0, g: 1, b: 0, a: 1}
+  - type: 6
+    prefab: {fileID: 7176981909838302334, guid: c567952957f2c4a389637ec7d8dd5d30,
+      type: 3}
+    color: {r: 1, g: 1, b: 0, a: 1}
+  - type: 7
+    prefab: {fileID: 2366815415826272603, guid: b7b33bedd38e144ed813173c455de785,
+      type: 3}
+    color: {r: 1, g: 0, b: 1, a: 1}
