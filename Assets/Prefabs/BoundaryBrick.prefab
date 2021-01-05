@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2476876843189141490}
   - component: {fileID: 2343899074784938938}
   - component: {fileID: 7133221394768558802}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2928219215664462400}
   - component: {fileID: 465949697721919127}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: BoundaryBrick
   m_TagString: Wall
   m_Icon: {fileID: 0}

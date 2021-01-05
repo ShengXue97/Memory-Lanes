@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1303875115364249532}
   - component: {fileID: 2736749368242438956}
   - component: {fileID: 1547243587738319321}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: PathBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
