@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : Trigger
+public class DoorButton : Trigger
 {
     [SerializeField]
     private AudioSource audioSource;
@@ -23,7 +23,7 @@ public class Button : Trigger
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter(Collider collider)

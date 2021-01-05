@@ -16,9 +16,9 @@ public class TileHelper : MonoBehaviour
     [SerializeField]
     private int height = 18;
     [SerializeField]
-    private Button tileButton;
+    private DoorButton tileButton;
 
-    private 
+    private
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +27,6 @@ public class TileHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

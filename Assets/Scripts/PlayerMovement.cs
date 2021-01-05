@@ -23,7 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     // Movement delay lets player keep moving forward in discrete steps when button is held down
     private float movementDelayTimer = 0.0f;
-    private float movementDelayTime = 0.15f; // 0.15s
+
+    [SerializeField]
+    private float movementDelayTime = 0.05f; // 0.15s
+    private float playerMovementSpeed = 8f;
     private bool isMovementOnDelay = false;
 
     // Use this for initialization
@@ -49,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
             control.Load();
         }
 
-
-        print(joystick.Horizontal + ";" + joystick.Vertical);
         float pointer_x = Input.GetAxisRaw("Horizontal");
         float pointer_y = Input.GetAxisRaw("Vertical");
         // if (Mathf.Abs(joystick.Horizontal) > 0.2f)
@@ -68,6 +69,9 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(pointer_x + ";" + pointer_y);
 
         // movement delay timer
+
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, playerMovementSpeed * Time.deltaTime);
+
         if (isMovementOnDelay)
         {
             movementDelayTimer += Time.deltaTime;
@@ -80,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isMovementOnDelay) return;
 
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 20f * Time.deltaTime);
+
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05F)
         {
             if (Mathf.Abs(pointer_x) == 1f)
