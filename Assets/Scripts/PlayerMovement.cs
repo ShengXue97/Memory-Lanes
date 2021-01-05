@@ -19,10 +19,13 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform movePoint;
     public LayerMask whatStopsMovement;
-
-    private bool canMoveHorizontal = true;
-    private bool canMoveVertical = true;
     private float currentTime;
+
+    // Movement delay lets player keep moving forward in discrete steps when button is held down
+    private float movementDelayTimer = 0.0f;
+    private float movementDelayTime = 0.15f; // 0.15s
+    private bool isMovementOnDelay = false;
+
     // Use this for initialization
     void Start()
     {
@@ -60,26 +63,29 @@ public class PlayerMovement : MonoBehaviour
         //     pointer_y = joystick.Vertical;
         // }
 
-        if (Mathf.Abs(pointer_x) == 0f)
-        {
-            //Prevents holding down arrow keys to move, must release
-            canMoveHorizontal = true;
-        }
-
-        if (Mathf.Abs(pointer_y) == 0f)
-        {
-            //Prevents holding down arrow keys to move, must release
-            canMoveVertical = true;
-        }
+        //if (Mathf.Abs(pointer_x) == 0f && Mathf.Abs(pointer_y) == 0f) isMovementOnDelay = false;
 
         //Debug.Log(pointer_x + ";" + pointer_y);
+
+        // movement delay timer
+        if (isMovementOnDelay)
+        {
+            movementDelayTimer += Time.deltaTime;
+            if (movementDelayTimer >= movementDelayTime)
+            {
+                isMovementOnDelay = false;
+                movementDelayTimer = 0.0f;
+            }
+        }
+
+        if (isMovementOnDelay) return;
 
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 20f * Time.deltaTime);
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05F)
         {
-            if (Mathf.Abs(pointer_x) == 1f && canMoveHorizontal)
+            if (Mathf.Abs(pointer_x) == 1f)
             {
-                canMoveHorizontal = false;
+                isMovementOnDelay = true;
                 if (Physics.OverlapSphere(movePoint.position + new Vector3(pointer_x * 1, 0f, 0f), 0.2f, whatStopsMovement).Length == 0)
                 {
                     if (pointer_x == -1f)
@@ -94,9 +100,9 @@ public class PlayerMovement : MonoBehaviour
                     movePoint.position += new Vector3(pointer_x, 0f, 0f);
                 }
             }
-            else if (Mathf.Abs(pointer_y) == 1f && canMoveVertical)
+            else if (Mathf.Abs(pointer_y) == 1f)
             {
-                canMoveVertical = false;
+                isMovementOnDelay = true;
                 if (Physics.OverlapSphere(movePoint.position + new Vector3(0f, 0f, pointer_y * 1), 0.2f, whatStopsMovement).Length == 0)
                 {
                     if (pointer_y == -1f)
@@ -110,10 +116,6 @@ public class PlayerMovement : MonoBehaviour
                     // anim.SetBool("Hop", true);
                     movePoint.position += new Vector3(0f, 0f, pointer_y);
                 }
-            }
-            else
-            {
-                //anim.SetBool("Hop", false);
             }
         }
     }
