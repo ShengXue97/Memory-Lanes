@@ -9,6 +9,10 @@ public class Agent : MonoBehaviour
         {
             return;
         }
+        if (CompareTag("NPC") && trigger.CompareTag("Goal"))
+        {
+            return;
+        }
         trigger.On();
     }
 
@@ -16,6 +20,10 @@ public class Agent : MonoBehaviour
     {
         MyTrigger trigger = other.GetComponent<MyTrigger>();
         if (trigger == null)
+        {
+            return;
+        }
+        if (CompareTag("NPC") && trigger.CompareTag("Goal"))
         {
             return;
         }

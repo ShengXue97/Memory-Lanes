@@ -23,18 +23,8 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Wall")
-        {
-            directionVector.z *= -1;
-            directionVector.x *= -1;
-        }
-
-        if (collision.gameObject.tag == "aPlayer")
-        {
-            directionVector.z *= -1; // bounce back on collision
-            directionVector.x *= -1;
-        }
-
+        directionVector.z *= -1; // bounce back on collision
+        directionVector.x *= -1;
     }
 
     private void OnCollisionExit(Collision collision)
