@@ -4748,7 +4748,7 @@ GameObject:
   - component: {fileID: 8708152058757644042}
   - component: {fileID: 6876872214554776715}
   - component: {fileID: 1657166827617201615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4903,12 +4903,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f6e982ae36527f644853c443477f1019,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2291006488609559945, guid: f6e982ae36527f644853c443477f1019,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6e982ae36527f644853c443477f1019, type: 3}

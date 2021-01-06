@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 690076607509018345}
   - component: {fileID: 2618729113014742553}
   - component: {fileID: 7212671616171485706}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2479041437709149663}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6842154799183300362}
   - component: {fileID: 2802263654257020243}
   - component: {fileID: 6397843097137427010}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   movePoint: {fileID: 2479041437709149663}
   whatStopsMovement:
     serializedVersion: 2
-    m_Bits: 10496
+    m_Bits: 6400
 --- !u!114 &6397843097137427010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 8911727529627463307}
   - component: {fileID: 6000240525798187058}
   - component: {fileID: 3363218851634120977}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3590120561426413433}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

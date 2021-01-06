@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6033893161131894877}
   - component: {fileID: 2515700168912672587}
   - component: {fileID: 7450507556847788675}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 470361531866533218}
   - component: {fileID: 5106111119357714470}
   - component: {fileID: 5652738737974727041}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8163571142361955817}
   - component: {fileID: 5045471458504577747}
   - component: {fileID: 772891955727854023}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9501,7 +9501,7 @@ GameObject:
   - component: {fileID: 6346270348541138390}
   - component: {fileID: 731311568177987650}
   - component: {fileID: 7701620763232387816}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9577,7 +9577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6795243134506821158}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9614,7 +9614,7 @@ GameObject:
   - component: {fileID: 2760758189534387839}
   - component: {fileID: 7616147729418158707}
   - component: {fileID: 2836875394462181590}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9921,7 +9921,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f6e982ae36527f644853c443477f1019,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: f6e982ae36527f644853c443477f1019,
         type: 3}
@@ -9931,7 +9931,7 @@ PrefabInstance:
     - target: {fileID: 2291006488609559945, guid: f6e982ae36527f644853c443477f1019,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2291006488609559945, guid: f6e982ae36527f644853c443477f1019,
         type: 3}

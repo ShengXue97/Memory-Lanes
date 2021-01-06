@@ -21,11 +21,11 @@ TagManager:
   - UI
   - 
   - 
-  - Floor
-  - NPC
-  - Ground
-  - Ignore
-  - 
+  - Boundary
+  - Path
+  - Triggers
+  - Activators
+  - Agents
   - 
   - 
   - 

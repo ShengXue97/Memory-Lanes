@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8752287339905154219}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5333821219010896748}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: Activators
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2366815415767635010}
   - component: {fileID: 2366815415767635009}
   - component: {fileID: 2366815415767635008}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 9144112060818229012}
   - component: {fileID: 3186872321041273602}
   - component: {fileID: 959424868619189836}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
