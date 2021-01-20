@@ -2,26 +2,6 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public enum LevelTileType
-{
-    Boundary,
-    Path,
-    Player,
-    Goal,
-    Switch,
-    Door,
-    Platform,
-    Npc,
-}
-
-[Serializable]
-public struct LevelTile
-{
-    public LevelTileType type;
-    public GameObject prefab;
-    public Color color;
-}
-
 public class LevelGenerator : ScriptableWizard
 {
     [Header("Settings")]
@@ -108,36 +88,36 @@ public class LevelGenerator : ScriptableWizard
 
     private void CreateGridTile(Level levelPrefab, LevelTile tile, Vector3 tilePosition)
     {
-        switch (tile.type)
+        switch (tile.Type)
         {
             case LevelTileType.Boundary:
-                InstantiateTile(settings.GetTile(LevelTileType.Boundary).prefab, tilePosition, levelPrefab.boundaryContainer);
+                InstantiateTile(settings.GetTile(LevelTileType.Boundary).Prefab, tilePosition, levelPrefab.boundaryContainer);
                 break;
             default:
-                InstantiateTile(settings.GetTile(LevelTileType.Path).prefab, tilePosition, levelPrefab.pathContainer);
+                InstantiateTile(settings.GetTile(LevelTileType.Path).Prefab, tilePosition, levelPrefab.pathContainer);
                 break;
         }
     }
 
     private void CreateGridObject(Level levelPrefab, LevelTile tile, Vector3 tilePosition)
     {
-        switch (tile.type)
+        switch (tile.Type)
         {
             case LevelTileType.Player:
-                levelPrefab.player = InstantiateTile(tile.prefab, tilePosition, levelPrefab.transform).GetComponent<Agent>();
+                levelPrefab.player = InstantiateTile(tile.Prefab, tilePosition, levelPrefab.transform).GetComponent<Agent>();
                 break;
             case LevelTileType.Goal:
-                levelPrefab.goal = InstantiateTile(tile.prefab, tilePosition, levelPrefab.triggerContainer).GetComponent<MyGoal>();
+                levelPrefab.goal = InstantiateTile(tile.Prefab, tilePosition, levelPrefab.triggerContainer).GetComponent<MyGoal>();
                 break;
             case LevelTileType.Switch:
-                InstantiateTile(tile.prefab, tilePosition, levelPrefab.triggerContainer);
+                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.triggerContainer);
                 break;
             case LevelTileType.Door:
             case LevelTileType.Platform:
-                InstantiateTile(tile.prefab, tilePosition, levelPrefab.activatorContainer);
+                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.activatorContainer);
                 break;
             case LevelTileType.Npc:
-                InstantiateTile(tile.prefab, tilePosition, levelPrefab.transform);
+                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.transform);
                 break;
             default:
                 break;

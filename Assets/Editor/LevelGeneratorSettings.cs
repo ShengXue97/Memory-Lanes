@@ -19,8 +19,8 @@ public class LevelGeneratorSettings : ScriptableObject
             
         foreach (var tile in tiles)
         {
-            tilesByColor[tile.color] = tile;
-            tilesByType[tile.type] = tile;
+            tilesByColor[tile.Color] = tile;
+            tilesByType[tile.Type] = tile;
         }
     }
 
