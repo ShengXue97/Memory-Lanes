@@ -33,8 +33,6 @@ public class Level : MonoBehaviour
     public List<LevelEvent> events;
     private Dictionary<TriggerEvent, List<ActivatorEvent>> eventBindings;
 
-    public GameObject objref;
-
     public void Awake()
     {
         eventBindings = new Dictionary<TriggerEvent, List<ActivatorEvent>>();
