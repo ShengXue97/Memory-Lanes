@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -44,7 +45,7 @@ public class LevelManager : MonoBehaviour, ITriggerListener, IGoalListener
 
     public void OnTriggerEvent(TriggerEvent triggerEvent)
     {
-        ActivatorEvent[] events = level.GetTriggerEvents(triggerEvent);
+        List<ActivatorEvent> events = level.GetActivatorEvents(triggerEvent);
         foreach (ActivatorEvent evt in events)
         {
             switch (evt.action)

@@ -78,7 +78,7 @@ public class Level : MonoBehaviour
         }
     }
 
-    public List<ActivatorEvent> GetTriggerEvents(TriggerEvent triggerEvent)
+    public List<ActivatorEvent> GetActivatorEvents(TriggerEvent triggerEvent)
     {
         List<ActivatorEvent> activatorEvents;
         if (!eventBindings.TryGetValue(triggerEvent, out activatorEvents))
