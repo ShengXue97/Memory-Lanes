@@ -3,6 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
+public struct JsonLevelEvent
+{
+    public JsonTriggerEvent trigger;
+    public JsonActivatorEvent[] activators;
+    
+    public LevelEvent CreateFromJson(Level level)
+    {
+        LevelEvent levelEvent = new LevelEvent();
+        levelEvent.triggerEvent = trigger.CreateFromJson(level);
+
+        levelEvent.activatorEvents = new List<ActivatorEvent>();
+        foreach (JsonActivatorEvent activator in activators)
+        {
+            levelEvent.activatorEvents.Add(activator.CreateFromJson(level));
+        }
+
+        return levelEvent;
+    }
+}
+
+[Serializable]
 public struct JsonTriggerEvent
 {
     // Coordinates of trigger
