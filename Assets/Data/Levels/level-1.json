@@ -1,0 +1,14 @@
+{
+    "name": "level-1",
+    "tilemap": "level-1.png",
+    "music": "bgm.mp3",
+    "events": [
+        {
+            "trigger": {"x": 5, "y": 2, "action": "On"},
+            "activators": [
+                {"x": 2, "y": 2, "action": "Toggle"},
+                {"x": 1, "y": 3, "action": "Toggle"}
+            ]
+        }
+    ]
+}
