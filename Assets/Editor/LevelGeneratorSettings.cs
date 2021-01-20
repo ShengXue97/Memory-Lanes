@@ -5,6 +5,12 @@ using UnityEngine;
 // [CreateAssetMenu(fileName = "Level Settings", menuName = "Level Settings", order = 0)]
 public class LevelGeneratorSettings : ScriptableObject
 {
+    [Header("Folder Paths")]
+    public string jsonLevelFolder = "Data/Levels";
+    public string musicFolder = "ArtAssets/Music";
+    public string tilemapFolder = "Data/Levels";
+    public string levelPrefabsFolder = "Prefabs";
+
     [Header("Level Tiles")]
     public GameObject levelPrefab;
 
