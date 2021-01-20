@@ -27,8 +27,10 @@ public class Level : MonoBehaviour
     [HideInInspector]
     public MyActivator[] activators;
 
-    [SerializeField]
-    private LevelEvent[] events;
+    public GameObject[,] backgroundObjects;
+    public GameObject[,] foregroundObjects;
+
+    public List<LevelEvent> events;
     private Dictionary<TriggerEvent, List<ActivatorEvent>> eventBindings;
 
     public GameObject objref;
@@ -86,5 +88,15 @@ public class Level : MonoBehaviour
             return new List<ActivatorEvent>();
         }
         return activatorEvents;
+    }
+    
+    public GameObject GetBackgroundObject(int x, int y)
+    {
+        return backgroundObjects[x, y];
+    }
+
+    public GameObject GetForegroundObject(int x, int y)
+    {
+        return foregroundObjects[x, y];
     }
 }
