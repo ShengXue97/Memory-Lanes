@@ -1,6 +1,29 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+
+[Serializable]
+public struct JsonLevel
+{
+    public string name;
+
+    public string tilemap;
+    public string music;
+
+    public JsonLevelEvent[] events;
+    
+    public List<LevelEvent> CreateLevelEvents(Level levelPrefab)
+    {
+        List<LevelEvent> parsedEvents = new List<LevelEvent>();
+
+        // Populate LevelEvents using information from Json
+        foreach (JsonLevelEvent evt in events)
+        {
+            parsedEvents.Add(evt.CreateFromJson(levelPrefab));
+        }
+
+        return parsedEvents;
+    }
+}
 
 [Serializable]
 public struct JsonLevelEvent
