@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class LevelGenerator : ScriptableWizard
 {
-    [Header("Settings")]
-    [SerializeField] private LevelGeneratorSettings settings;
+    // Path variables
+    private static string _pathToSettings = "Assets/Prefabs/Level Generator Settings.asset";
 
-    [Header("Level")]
-    [SerializeField] private Texture2D tilemap;
+    // Inspector fields for Level Generator 
+
+    [Header("Level Generator Settings"), SerializeField]
+    private LevelGeneratorSettings settings;
+
+    [Header("Json Level"), SerializeField]
+    private string jsonFilename;
+
+    // Scriptable Wizard Functions
 
     [MenuItem("GameObject/Memory Lanes/Create Level")]
     private static void CreateWizard()
@@ -18,22 +25,50 @@ public class LevelGenerator : ScriptableWizard
 
     private void Awake()
     {
-        settings = AssetDatabase.LoadAssetAtPath<LevelGeneratorSettings>(
-                "Assets/Prefabs/Level Generator Settings.asset");
+        settings = AssetDatabase.LoadAssetAtPath<LevelGeneratorSettings>(_pathToSettings);
     }
 
+    /**
+     * Perform the following when the Create button is selected in the dialog window.
+     */
     void OnWizardCreate()
     {
-        settings.Load();
-
-        Level levelPrefab = CreateLevelPrefab();
-        CreateLevel(levelPrefab);
-        SaveTriggers(levelPrefab);
-        SaveActivators(levelPrefab);
-        SaveLevelPrefab(levelPrefab, tilemap.name);
-        DestroyImmediate(levelPrefab.gameObject);
+        GenerateLevel();
     }
 
+    private void GenerateLevel()
+    {
+        Level levelPrefab = null;
+        try
+        {
+            settings.Load();
+            
+            levelPrefab = CreateLevelPrefab();
+
+            JsonLevel jsonLevel = LoadJsonLevel(jsonFilename);
+
+            GenerateLevelLayout(levelPrefab, jsonLevel);
+            SaveLevelPrefab(levelPrefab, jsonLevel);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+        finally
+        {
+            if (levelPrefab != null)
+            {
+                DestroyImmediate(levelPrefab.gameObject);
+            }
+        }
+    }
+    
+    // Helper Functions
+
+    /**
+     * Returns an instance of a GameObject prefab with an attached Level component.
+     * The prefab can be changed in the level generator settings.
+     */
     private Level CreateLevelPrefab()
     {
         GameObject prefab = PrefabUtility.InstantiatePrefab(settings.levelPrefab) as GameObject;
@@ -51,100 +86,156 @@ public class LevelGenerator : ScriptableWizard
         return levelPrefab;
     }
 
-    private void SaveLevelPrefab(Level levelPrefab, string filename)
+    /**
+     * Saves a GameObject prefab with an attached Level component.
+     * It will be saved in the levelPrefabsFolder path found in the settings.
+     */
+    private void SaveLevelPrefab(Level levelPrefab, JsonLevel jsonLevel)
     {
-        PrefabUtility.SaveAsPrefabAsset(levelPrefab.gameObject, $"Assets/Prefabs/{filename}.prefab");
+        PrefabUtility.SaveAsPrefabAsset(levelPrefab.gameObject, $"Assets/{settings.levelPrefabsFolder}/{jsonLevel.name}.prefab");
+    }
+
+    /**
+     * Loads a JsonLevel with the given filename.
+     * It will be loaded from the jsonLevelFolder path found in the settings.
+     */
+    private JsonLevel LoadJsonLevel(string filename)
+    {
+        string jsonLevelString = AssetDatabase.LoadAssetAtPath<TextAsset>($"Assets/{settings.jsonLevelFolder}/{filename}").text;
+        return JsonUtility.FromJson<JsonLevel>(jsonLevelString);
     }
     
-    private void CreateLevel(Level levelPrefab)
+    /**
+     * Builds a Level from a JsonLevel.
+     */
+    private void GenerateLevelLayout(Level levelPrefab, JsonLevel jsonLevel)
     {
+        AudioClip music = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/{settings.musicFolder}/{jsonLevel.music}");
+        Texture2D tilemap = AssetDatabase.LoadAssetAtPath<Texture2D>($"Assets/{settings.tilemapFolder}/{jsonLevel.tilemap}");
+    
+        CreateLevelLayout(levelPrefab, tilemap);
+
+        levelPrefab.music = music;
+        levelPrefab.events = jsonLevel.CreateLevelEvents(levelPrefab);
+    }
+    
+    /**
+     * Creates all level objects in a grid fashion from a tilemap image.
+     * The bottom left-corner of the level should be (x, y) = (1, 1)
+     */
+    private void CreateLevelLayout(Level levelPrefab, Texture2D tilemap)
+    {
+        // Get grid dimensions
         int width = tilemap.width;
         int height = tilemap.height;
-
-        Color[] pixelColors = tilemap.GetPixels();
+    
+        Color[] pixels = tilemap.GetPixels();
         int k = 0;
-
+    
+        // Create empty grid
+        levelPrefab.backgroundObjects = new GameObject[width, height];
+        levelPrefab.foregroundObjects = new GameObject[width, height];
+    
+        // For every row
         for (int j = 0; j < height; j++)
         {
+            // For every column
             for (int i = 0; i < width; i++)
             {
+                // Get tile position
                 Vector3 tilePosition = new Vector3(i, 0f, j);
-                Color pixelColor = pixelColors[k++];
 
-                try
-                {
-                    LevelTile backgroundTile = settings.GetBackgroundTile(pixelColor);
-                    LevelTile foregroundTile = settings.GetForegroundTile(pixelColor);
-
-                    CreateGridTile(levelPrefab, backgroundTile, tilePosition);
-                    CreateGridObject(levelPrefab, foregroundTile, tilePosition);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e.Message);
-                }
+                LevelTile backgroundTile = settings.GetBackgroundTile(pixels[k]);
+                LevelTile foregroundTile = settings.GetForegroundTile(pixels[k]);
+                
+                levelPrefab.backgroundObjects[i, j] = InstantiateTile(levelPrefab, backgroundTile, tilePosition);
+                levelPrefab.foregroundObjects[i, j] = InstantiateTile(levelPrefab, foregroundTile, tilePosition);
+    
+                k++;
             }
         }
     }
 
-    private void CreateGridTile(Level levelPrefab, LevelTile tile, Vector3 tilePosition)
+    /**
+     * Creates and returns an instance of a tile prefab.
+     */
+    private GameObject InstantiateTile(Level levelPrefab, LevelTile tile, Vector3 tilePosition)
+    {
+        // Skip object creation if tile is not specified
+        if (tile == null)
+        {
+            return null;
+        }
+        
+        // Get parent transform for the tile
+        Transform parentTransform = GetParentTransform(levelPrefab, tile);
+
+        // Since tile.prefab is a GameObject, tileInstance (a prefab instance) must also be a GameObject.
+        GameObject tileInstance = (GameObject)PrefabUtility.InstantiatePrefab(tile.Prefab, parentTransform);
+        
+        // If required, assign components in tileCopy to the named fields in Level.
+        // eg. If tile is a trigger, then add tileCopy to level.triggers.
+        AddTileToLevel(levelPrefab, tile, tileInstance);
+
+        // Position tile in world
+        tileInstance.transform.position = tilePosition;
+
+        return tileInstance;
+    }
+    
+    /**
+     * Choose how to organise tiles in the level prefab.
+     */
+    public Transform GetParentTransform(Level level, LevelTile tile)
     {
         switch (tile.Type)
         {
             case LevelTileType.Boundary:
-                InstantiateTile(settings.boundary.Prefab, tilePosition, levelPrefab.boundaryContainer);
-                break;
+                return level.boundaryContainer;
+
+            case LevelTileType.Path:
+                return level.pathContainer;
+
+            case LevelTileType.Switch:
+            case LevelTileType.Goal:
+                return level.triggerContainer;
+
+            case LevelTileType.Door:
+            case LevelTileType.Platform:
+                return level.activatorContainer;
+            
             default:
-                InstantiateTile(settings.path.Prefab, tilePosition, levelPrefab.pathContainer);
-                break;
+                return level.transform;
         }
     }
-
-    private void CreateGridObject(Level levelPrefab, LevelTile tile, Vector3 tilePosition)
+    
+    /**
+     * Choose how to assign tiles in the level prefab.
+     */
+    public void AddTileToLevel(Level level, LevelTile tile, GameObject tileInstance)
     {
         switch (tile.Type)
         {
             case LevelTileType.Player:
-                levelPrefab.player = InstantiateTile(tile.Prefab, tilePosition, levelPrefab.transform).GetComponent<Agent>();
-                break;
+                level.player = tileInstance.GetComponent<Agent>();
+                return;
+
             case LevelTileType.Goal:
-                levelPrefab.goal = InstantiateTile(tile.Prefab, tilePosition, levelPrefab.triggerContainer).GetComponent<MyGoal>();
-                break;
+                level.goal = tileInstance.GetComponent<MyGoal>();
+                level.triggers.Add(tileInstance.GetComponent<MyTrigger>());
+                return;
+
             case LevelTileType.Switch:
-                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.triggerContainer);
-                break;
+                level.triggers.Add(tileInstance.GetComponent<MyTrigger>());
+                return;
+
             case LevelTileType.Door:
             case LevelTileType.Platform:
-                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.activatorContainer);
-                break;
-            case LevelTileType.Npc:
-                InstantiateTile(tile.Prefab, tilePosition, levelPrefab.transform);
-                break;
+                level.activators.Add(tileInstance.GetComponent<MyActivator>());
+                return;
+
             default:
-                break;
+                return;
         }
-    }
-
-    private GameObject InstantiateTile(GameObject prefab, Vector3 tilePosition, Transform transform)
-    {
-        GameObject tile = PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
-
-        if (tile == null)
-        {
-            throw new NullReferenceException($"Undefined tile @ {tilePosition}");
-        }
-
-        tile.transform.position = tilePosition;
-        return tile;
-    }
-
-    private void SaveTriggers(Level levelPrefab)
-    {
-        levelPrefab.triggers = levelPrefab.triggerContainer.GetComponentsInChildren<MyTrigger>();
-    }
-    
-    private void SaveActivators(Level levelPrefab)
-    {
-        levelPrefab.activators = levelPrefab.activatorContainer.GetComponentsInChildren<MyActivator>();
     }
 }

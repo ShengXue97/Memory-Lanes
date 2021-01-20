@@ -23,9 +23,9 @@ public class Level : MonoBehaviour
     public Transform activatorContainer;
 
     [HideInInspector]
-    public MyTrigger[] triggers;
+    public List<MyTrigger> triggers;
     [HideInInspector]
-    public MyActivator[] activators;
+    public List<MyActivator> activators;
 
     public GameObject[,] backgroundObjects;
     public GameObject[,] foregroundObjects;
