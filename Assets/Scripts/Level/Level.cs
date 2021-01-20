@@ -46,14 +46,14 @@ public class Level : MonoBehaviour
 
             TriggerEvent triggerEvent = new TriggerEvent();
             var triggerPosition = trigger.position;
-            triggerEvent.trigger = Level.GetObject(triggerPosition).GetComponent<Trigger>();
+            // triggerEvent.trigger = Level.GetObject(triggerPosition).GetComponent<Trigger>();
             triggerEvent.action = trigger.action=="On" ? TriggerAction.On : TriggerAction.Off;
 
             List<ActivatorEvent> activatorEvents = new List<ActivatorEvent>();
             foreach (JsonActivator act in activators) {
                 ActivatorEvent activatorEvent = new ActivatorEvent();
                 var activatorPosition = act.position;
-                activatorEvent.activator = Level.GetObject(activatorPosition).GetComponent<Activator>();
+                // activatorEvent.activator = Level.GetObject(activatorPosition).GetComponent<Activator>();
                 activatorEvent.action = act.action == "On" ? ActivatorAction.On : act.action == "Off" ? ActivatorAction.Off : ActivatorAction.Toggle;
             }
 
