@@ -1,44 +1,62 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // [CreateAssetMenu(fileName = "Level Settings", menuName = "Level Settings", order = 0)]
 public class LevelGeneratorSettings : ScriptableObject
 {
+    [Header("Level Tiles")]
     public GameObject levelPrefab;
-    
-    [SerializeField]
-    private LevelTile[] tiles;
 
-    private Dictionary<Color, LevelTile> tilesByColor;
-    private Dictionary<LevelTileType, LevelTile> tilesByType;
+    // Background Tiles
+    public LevelTile boundary = new LevelTile(type: LevelTileType.Boundary, isBackground: true);
+    public LevelTile path = new LevelTile(type: LevelTileType.Path, isBackground: true);
+
+    // Foreground Tiles
+    public LevelTile player = new LevelTile(type: LevelTileType.Player, isBackground: false);
+    public LevelTile goal = new LevelTile(type: LevelTileType.Goal, isBackground: false);
+    public LevelTile button = new LevelTile(type: LevelTileType.Switch, isBackground: false);
+    public LevelTile door = new LevelTile(type: LevelTileType.Door, isBackground: false);
+    public LevelTile platform = new LevelTile(type: LevelTileType.Platform, isBackground: false);
+    public LevelTile npc = new LevelTile(type: LevelTileType.Npc, isBackground: false);
+
+    // Lookup Tables
+    private Dictionary<Color, LevelTile> backgroundTilesByColor;
+    private Dictionary<Color, LevelTile> foregroundTilesByColor;
 
     public void Load()
     {
-        tilesByColor = new Dictionary<Color, LevelTile>();
-        tilesByType = new Dictionary<LevelTileType, LevelTile>();
-            
-        foreach (var tile in tiles)
-        {
-            tilesByColor[tile.Color] = tile;
-            tilesByType[tile.Type] = tile;
-        }
+        backgroundTilesByColor = Tiles.Where(x => x.IsBackground).ToDictionary(k => k.Color, v => v);
+        foregroundTilesByColor = Tiles.Where(x => !x.IsBackground).ToDictionary(k => k.Color, v => v);
     }
 
-    public LevelTile GetTile(Color color)
+    public LevelTile GetBackgroundTile(Color color)
     {
-        if (!tilesByColor.TryGetValue(color, out LevelTile tile))
+        if (!backgroundTilesByColor.TryGetValue(color, out LevelTile tile))
         {
-            throw new KeyNotFoundException($"Undefined tilemap color: {color}");
+            return path;
         }
         return tile;
     }
     
-    public LevelTile GetTile(LevelTileType type)
+    public LevelTile GetForegroundTile(Color color)
     {
-        if (!tilesByType.TryGetValue(type, out LevelTile tile))
+        if (!foregroundTilesByColor.TryGetValue(color, out LevelTile tile))
         {
-            throw new KeyNotFoundException($"Undefined tilemap type: {type}");
+            return null;
         }
         return tile;
     }
+
+    public LevelTile[] Tiles => new [] 
+    {
+        boundary,
+        path,
+        player,
+        goal,
+        button,
+        door,
+        platform,
+        npc,
+    };
 }

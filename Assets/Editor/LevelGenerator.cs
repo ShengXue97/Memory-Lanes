@@ -73,10 +73,11 @@ public class LevelGenerator : ScriptableWizard
 
                 try
                 {
-                    LevelTile tile = settings.GetTile(pixelColor);
+                    LevelTile backgroundTile = settings.GetBackgroundTile(pixelColor);
+                    LevelTile foregroundTile = settings.GetForegroundTile(pixelColor);
 
-                    CreateGridTile(levelPrefab, tile, tilePosition);
-                    CreateGridObject(levelPrefab, tile, tilePosition);
+                    CreateGridTile(levelPrefab, backgroundTile, tilePosition);
+                    CreateGridObject(levelPrefab, foregroundTile, tilePosition);
                 }
                 catch (Exception e)
                 {
@@ -91,10 +92,10 @@ public class LevelGenerator : ScriptableWizard
         switch (tile.Type)
         {
             case LevelTileType.Boundary:
-                InstantiateTile(settings.GetTile(LevelTileType.Boundary).Prefab, tilePosition, levelPrefab.boundaryContainer);
+                InstantiateTile(settings.boundary.Prefab, tilePosition, levelPrefab.boundaryContainer);
                 break;
             default:
-                InstantiateTile(settings.GetTile(LevelTileType.Path).Prefab, tilePosition, levelPrefab.pathContainer);
+                InstantiateTile(settings.path.Prefab, tilePosition, levelPrefab.pathContainer);
                 break;
         }
     }
