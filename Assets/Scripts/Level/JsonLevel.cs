@@ -12,6 +12,7 @@ public struct JsonLevel
 
     public JsonTileSettings[] triggerSettings;
     public JsonTileSettings[] activatorSettings;
+    public JsonTileSettings[] npcSettings;
 
     public JsonLevelEvent[] events;
     
@@ -32,6 +33,7 @@ public struct JsonLevel
     {
         ApplyTriggerSettings(level);
         ApplyActivatorSettings(level);
+        ApplyNpcSettings(level);
     }
 
     public void ApplyTriggerSettings(Level level)
@@ -51,6 +53,16 @@ public struct JsonLevel
             var activator = level.activators[settings.id];
             activator.on = settings.on;
             activator.transform.eulerAngles = settings.EulerAngles;
+        }
+    }
+    
+    public void ApplyNpcSettings(Level level)
+    {
+        foreach (JsonTileSettings settings in npcSettings)
+        {
+            var npc = level.npcs[settings.id];
+            npc.movementSpeed = settings.speed;
+            npc.transform.eulerAngles = settings.EulerAngles;
         }
     }
 }
@@ -121,6 +133,9 @@ public struct JsonTileSettings
     
     // Whether the tile should be on/off (for mechanisms)
     public bool on;
+    
+    // The movement speed of the tile (for npcs)
+    public float speed;
 
     public Vector3 EulerAngles
     {
