@@ -9,6 +9,8 @@ public struct JsonLevel
 
     public string tilemap;
     public string music;
+    
+    public JsonVector3 tree;
 
     public JsonTileSettings[] triggerSettings;
     public JsonTileSettings[] activatorSettings;
@@ -31,9 +33,16 @@ public struct JsonLevel
     
     public void ApplyLevelSettings(Level level)
     {
+        ApplyTreeSettings(level);
         ApplyTriggerSettings(level);
         ApplyActivatorSettings(level);
         ApplyNpcSettings(level);
+    }
+    
+    public void ApplyTreeSettings(Level level)
+    {
+        var saveLoadIndicator = level.saveLoadIndicator;
+        saveLoadIndicator.transform.position = tree.Deserialize();
     }
 
     public void ApplyTriggerSettings(Level level)
@@ -154,5 +163,18 @@ public struct JsonTileSettings
                     return new Vector3(0, 0, 0);
             }
         }
+    }
+}
+
+[Serializable]
+public struct JsonVector3
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public Vector3 Deserialize()
+    {
+        return new Vector3(x, y, z);
     }
 }
