@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public struct JsonLevel
@@ -9,19 +10,48 @@ public struct JsonLevel
     public string tilemap;
     public string music;
 
+    public JsonTileSettings[] triggerSettings;
+    public JsonTileSettings[] activatorSettings;
+
     public JsonLevelEvent[] events;
     
-    public List<LevelEvent> CreateLevelEvents(Level levelPrefab)
+    public List<LevelEvent> CreateLevelEvents(Level level)
     {
         List<LevelEvent> parsedEvents = new List<LevelEvent>();
 
         // Populate LevelEvents using information from Json
         foreach (JsonLevelEvent evt in events)
         {
-            parsedEvents.Add(evt.CreateFromJson(levelPrefab));
+            parsedEvents.Add(evt.CreateFromJson(level));
         }
 
         return parsedEvents;
+    }
+    
+    public void ApplyLevelSettings(Level level)
+    {
+        ApplyTriggerSettings(level);
+        ApplyActivatorSettings(level);
+    }
+
+    public void ApplyTriggerSettings(Level level)
+    {
+        foreach (JsonTileSettings settings in triggerSettings)
+        {
+            var trigger = level.triggers[settings.id];
+            trigger.on = settings.on;
+            trigger.transform.eulerAngles = settings.EulerAngles;
+        }
+    }
+    
+    public void ApplyActivatorSettings(Level level)
+    {
+        foreach (JsonTileSettings settings in activatorSettings)
+        {
+            var activator = level.activators[settings.id];
+            activator.on = settings.on;
+            activator.transform.eulerAngles = settings.EulerAngles;
+        }
     }
 }
 

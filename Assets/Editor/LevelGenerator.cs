@@ -117,6 +117,8 @@ public class LevelGenerator : ScriptableWizard
 
         levelPrefab.music = music;
         levelPrefab.events = jsonLevel.CreateLevelEvents(levelPrefab);
+        
+        jsonLevel.ApplyLevelSettings(levelPrefab);
     }
     
     /**
