@@ -28,62 +28,54 @@ public struct JsonLevel
 [Serializable]
 public struct JsonLevelEvent
 {
-    public JsonTriggerEvent trigger;
-    public JsonActivatorEvent[] activators;
+    // Note: All object ids are counted from bottom-left to top-right of the tilemap
+    // Note: Triggers and activators are counted separately
+
+    // The id of the detected trigger
+    public int trigger;
+
+    // The ids of the affected activators
+    public int[] opens;
+    public int[] closes;
+    public int[] toggles;
     
     public LevelEvent CreateFromJson(Level level)
     {
         LevelEvent levelEvent = new LevelEvent();
-        levelEvent.triggerEvent = trigger.CreateFromJson(level);
+        levelEvent.triggerEvent = new TriggerEvent()
+        {
+            trigger = level.triggers[trigger],
+            action = TriggerAction.On,
+        };
 
         levelEvent.activatorEvents = new List<ActivatorEvent>();
-        foreach (JsonActivatorEvent activator in activators)
+        foreach (int activator in opens)
         {
-            levelEvent.activatorEvents.Add(activator.CreateFromJson(level));
+            levelEvent.activatorEvents.Add(new ActivatorEvent()
+            {
+                activator = level.activators[activator],
+                action = ActivatorAction.On,
+            });
+        }
+        
+        foreach (int activator in closes)
+        {
+            levelEvent.activatorEvents.Add(new ActivatorEvent()
+            {
+                activator = level.activators[activator],
+                action = ActivatorAction.Off,
+            });
+        }
+        
+        foreach (int activator in toggles)
+        {
+            levelEvent.activatorEvents.Add(new ActivatorEvent()
+            {
+                activator = level.activators[activator],
+                action = ActivatorAction.Toggle,
+            });
         }
 
         return levelEvent;
-    }
-}
-
-[Serializable]
-public struct JsonTriggerEvent
-{
-    // Coordinates of trigger
-    public int x;
-    public int y;
-
-    // actions: 'On', 'Off',
-    public string action;
-    
-    // public string type; // type of trigger - currently the only type is 'Switch'
-
-    public TriggerEvent CreateFromJson(Level level)
-    {
-        TriggerEvent triggerEvent = new TriggerEvent();
-        triggerEvent.trigger = level.GetForegroundObject(x, y).GetComponent<MyTrigger>();
-        Enum.TryParse(action, false, out triggerEvent.action);
-        return triggerEvent;
-    }
-}
-
-[Serializable]
-public struct JsonActivatorEvent
-{
-    // Coordinates of activator
-    public int x;
-    public int y;
-    
-    // actions: 'On', 'Off', 'Toggle',
-    public string action; 
-
-    // public string type; // types: 'Door', 'Platform'
-    
-    public ActivatorEvent CreateFromJson(Level level)
-    {
-        ActivatorEvent activatorEvent = new ActivatorEvent();
-        activatorEvent.activator = level.GetForegroundObject(x, y).GetComponent<MyActivator>();
-        Enum.TryParse(action, false, out activatorEvent.action);
-        return activatorEvent;
     }
 }
