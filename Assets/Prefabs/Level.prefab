@@ -28,6 +28,36 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6568632013425516596}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4649630225926058107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698439398408966676}
+  m_Layer: 0
+  m_Name: Agents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1698439398408966676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649630225926058107}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6568632013425516596}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4996714430920387780
@@ -91,6 +121,7 @@ Transform:
   - {fileID: 5816118941278659815}
   - {fileID: 1037927833878340733}
   - {fileID: 7765680695307931835}
+  - {fileID: 1698439398408966676}
   - {fileID: 8752287339905154219}
   - {fileID: 5333821219010896748}
   m_Father: {fileID: 0}
@@ -114,10 +145,12 @@ MonoBehaviour:
   saveLoadIndicator: {fileID: 1520790222640257104}
   boundaryContainer: {fileID: 1037927833878340733}
   pathContainer: {fileID: 7765680695307931835}
+  agentContainer: {fileID: 1698439398408966676}
   triggerContainer: {fileID: 8752287339905154219}
   activatorContainer: {fileID: 5333821219010896748}
   triggers: []
   activators: []
+  npcs: []
   events: []
 --- !u!1 &6541690270943634165
 GameObject:
@@ -177,7 +210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6568632013425516596}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5610111017051707696
 PrefabInstance:

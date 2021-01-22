@@ -19,6 +19,7 @@ public class Level : MonoBehaviour
 
     public Transform boundaryContainer;
     public Transform pathContainer;
+    public Transform agentContainer;
     public Transform triggerContainer;
     public Transform activatorContainer;
 
@@ -26,6 +27,8 @@ public class Level : MonoBehaviour
     public List<MyTrigger> triggers;
     [HideInInspector]
     public List<MyActivator> activators;
+    [HideInInspector]
+    public List<Enemy> npcs;
 
     public GameObject[,] backgroundObjects;
     public GameObject[,] foregroundObjects;
