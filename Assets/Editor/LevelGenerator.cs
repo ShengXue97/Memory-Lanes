@@ -13,7 +13,7 @@ public class LevelGenerator : ScriptableWizard
     private LevelGeneratorSettings settings;
 
     [Header("Json Level"), SerializeField]
-    private string jsonFilename;
+    private int levelNumber;
 
     // Scriptable Wizard Functions
 
@@ -45,7 +45,7 @@ public class LevelGenerator : ScriptableWizard
             
             levelPrefab = CreateLevelPrefab();
 
-            JsonLevel jsonLevel = LoadJsonLevel(jsonFilename);
+            JsonLevel jsonLevel = LoadJsonLevel($"level-{levelNumber}.json");
 
             GenerateLevelLayout(levelPrefab, jsonLevel);
             SaveLevelPrefab(levelPrefab, jsonLevel);
