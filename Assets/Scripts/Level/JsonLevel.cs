@@ -79,3 +79,35 @@ public struct JsonLevelEvent
         return levelEvent;
     }
 }
+
+[Serializable]
+public struct JsonTileSettings
+{
+    // The id of the tile
+    public int id;
+    
+    // Which direction the tile should face
+    public string facing;
+    
+    // Whether the tile should be on/off (for mechanisms)
+    public bool on;
+
+    public Vector3 EulerAngles
+    {
+        get
+        {
+            switch (facing)
+            {
+                case "R":
+                    return new Vector3(0, 90, 0);
+                case "D":
+                    return new Vector3(0f, 180, 0);
+                case "L":
+                    return new Vector3(0, -90, 0);
+                case "U":
+                default:
+                    return new Vector3(0, 0, 0);
+            }
+        }
+    }
+}
