@@ -2,13 +2,15 @@
     "name": "level-1",
     "tilemap": "level-1.png",
     "music": "bgm.mp3",
+    
+    "triggerSettings": [],
+    "activatorSettings": [
+        {"id": 0, "facing": "U", "on": true},
+        {"id": 1, "facing": "L", "on": false}
+    ],
+    "npcSettings": [],
+
     "events": [
-        {
-            "trigger": {"x": 5, "y": 2, "action": "On"},
-            "activators": [
-                {"x": 2, "y": 2, "action": "Toggle"},
-                {"x": 1, "y": 3, "action": "Toggle"}
-            ]
-        }
+        {"trigger": 0, "opens": [], "closes": [], "toggles": [0, 1]}
     ]
 }
