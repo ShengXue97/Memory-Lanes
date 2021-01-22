@@ -206,6 +206,9 @@ public class LevelGenerator : ScriptableWizard
             case LevelTileType.Platform:
                 return level.activatorContainer;
             
+            case LevelTileType.Npc:
+                return level.agentContainer;
+            
             default:
                 return level.transform;
         }
@@ -234,6 +237,10 @@ public class LevelGenerator : ScriptableWizard
             case LevelTileType.Door:
             case LevelTileType.Platform:
                 level.activators.Add(tileInstance.GetComponent<MyActivator>());
+                return;
+            
+            case LevelTileType.Npc:
+                level.npcs.Add(tileInstance.GetComponent<Enemy>());
                 return;
 
             default:
