@@ -114,11 +114,9 @@ public class LevelGenerator : ScriptableWizard
         Texture2D tilemap = AssetDatabase.LoadAssetAtPath<Texture2D>($"Assets/{settings.tilemapFolder}/{jsonLevel.tilemap}");
     
         CreateLevelLayout(levelPrefab, tilemap);
+        jsonLevel.ApplyLevelSettings(levelPrefab);
 
         levelPrefab.music = music;
-        levelPrefab.events = jsonLevel.CreateLevelEvents(levelPrefab);
-        
-        jsonLevel.ApplyLevelSettings(levelPrefab);
     }
     
     /**
