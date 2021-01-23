@@ -47,31 +47,40 @@ public struct JsonLevel
 
     public void ApplyTriggerSettings(Level level)
     {
-        foreach (JsonTileSettings settings in triggerSettings)
+        for (int i = 0; i < triggerSettings.Length; i++)
         {
-            var trigger = level.triggers[settings.id];
-            trigger.on = settings.on;
-            trigger.transform.eulerAngles = settings.EulerAngles;
+            var settings = triggerSettings[i];
+            var tile = level.triggers[i];
+
+            tile.name = settings.id;
+            tile.on = settings.on;
+            tile.transform.eulerAngles = settings.EulerAngles;
         }
     }
     
     public void ApplyActivatorSettings(Level level)
     {
-        foreach (JsonTileSettings settings in activatorSettings)
+        for (int i = 0; i < activatorSettings.Length; i++)
         {
-            var activator = level.activators[settings.id];
-            activator.on = settings.on;
-            activator.transform.eulerAngles = settings.EulerAngles;
+            var settings = activatorSettings[i];
+            var tile = level.activators[i];
+
+            tile.name = settings.id;
+            tile.on = settings.on;
+            tile.transform.eulerAngles = settings.EulerAngles;
         }
     }
     
     public void ApplyNpcSettings(Level level)
     {
-        foreach (JsonTileSettings settings in npcSettings)
+        for (int i = 0; i < npcSettings.Length; i++)
         {
-            var npc = level.npcs[settings.id];
-            npc.movementSpeed = settings.speed;
-            npc.transform.eulerAngles = settings.EulerAngles;
+            var settings = npcSettings[i];
+            var tile = level.npcs[i];
+
+            tile.name = settings.id;
+            tile.movementSpeed = settings.speed;
+            tile.transform.eulerAngles = settings.EulerAngles;
         }
     }
 }
@@ -135,7 +144,7 @@ public struct JsonLevelEvent
 public struct JsonTileSettings
 {
     // The id of the tile
-    public int id;
+    public string id;
     
     // Which direction the tile should face
     public string facing;
