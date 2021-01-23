@@ -5,19 +5,23 @@
 
     "tree": {"x": -2, "y": 0, "z": 3},
 
-    "triggerSettings": [],
+    "triggerSettings": [
+        {"id": "B1"},
+        {"id": "B2"},
+        {"id": "B3"}
+    ],
     "activatorSettings": [
-        {"id": 0, "facing": "U", "on": false},
-        {"id": 1, "facing": "U", "on": false},
-        {"id": 2, "facing": "U", "on": false}
+        {"id": "D1", "facing": "U", "on": false},
+        {"id": "D2", "facing": "U", "on": false},
+        {"id": "D3", "facing": "U", "on": false}
     ],
     "npcSettings": [
-        {"id": 0, "facing": "U", "speed": 5}
+        {"id": "E1", "facing": "D", "speed": 5}
     ],
 
     "events": [
-        {"trigger": 0, "opens": [0], "closes": [1], "toggles": []},
-        {"trigger": 1, "opens": [2], "closes": [], "toggles": []},
-        {"trigger": 2, "opens": [1], "closes": [2], "toggles": []}
+        {"trigger": "B1", "opens": ["D1"], "closes": ["D2"], "toggles": []},
+        {"trigger": "B2", "opens": ["D3"], "closes": [], "toggles": []},
+        {"trigger": "B3", "opens": ["D2"], "closes": ["D3"], "toggles": []}
     ]
 }

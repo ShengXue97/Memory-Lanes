@@ -3,14 +3,16 @@
     "tilemap": "level-1.png",
     "music": "bgm.mp3",
     
-    "triggerSettings": [],
+    "triggerSettings": [
+        {"id": "B1"}
+    ],
     "activatorSettings": [
-        {"id": 0, "facing": "U", "on": true},
-        {"id": 1, "facing": "L", "on": false}
+        {"id": "D1", "facing": "U", "on": true},
+        {"id": "D2", "facing": "L", "on": false}
     ],
     "npcSettings": [],
 
     "events": [
-        {"trigger": 0, "opens": [], "closes": [], "toggles": [0, 1]}
+        {"trigger": "B1", "opens": [], "closes": [], "toggles": ["D1", "D2"]}
     ]
 }
