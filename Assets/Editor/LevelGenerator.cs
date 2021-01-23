@@ -225,7 +225,6 @@ public class LevelGenerator : ScriptableWizard
 
             case LevelTileType.Goal:
                 level.goal = tileInstance.GetComponent<MyGoal>();
-                level.triggers.Add(tileInstance.GetComponent<MyTrigger>());
                 return;
 
             case LevelTileType.Switch:
