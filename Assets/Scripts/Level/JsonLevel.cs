@@ -17,35 +17,23 @@ public struct JsonLevel
     public JsonTileSettings[] npcSettings;
 
     public JsonLevelEvent[] events;
-    
-    public List<LevelEvent> CreateLevelEvents(Level level)
-    {
-        List<LevelEvent> parsedEvents = new List<LevelEvent>();
 
-        // Populate LevelEvents using information from Json
-        foreach (JsonLevelEvent evt in events)
-        {
-            parsedEvents.Add(evt.CreateFromJson(level));
-        }
-
-        return parsedEvents;
-    }
-    
     public void ApplyLevelSettings(Level level)
     {
         ApplyTreeSettings(level);
         ApplyTriggerSettings(level);
         ApplyActivatorSettings(level);
         ApplyNpcSettings(level);
+        ApplyLevelEvents(level);
     }
     
-    public void ApplyTreeSettings(Level level)
+    private void ApplyTreeSettings(Level level)
     {
         var saveLoadIndicator = level.saveLoadIndicator;
         saveLoadIndicator.transform.position = tree.Deserialize();
     }
 
-    public void ApplyTriggerSettings(Level level)
+    private void ApplyTriggerSettings(Level level)
     {
         for (int i = 0; i < triggerSettings.Length; i++)
         {
@@ -58,7 +46,7 @@ public struct JsonLevel
         }
     }
     
-    public void ApplyActivatorSettings(Level level)
+    private void ApplyActivatorSettings(Level level)
     {
         for (int i = 0; i < activatorSettings.Length; i++)
         {
@@ -71,7 +59,7 @@ public struct JsonLevel
         }
     }
     
-    public void ApplyNpcSettings(Level level)
+    private void ApplyNpcSettings(Level level)
     {
         for (int i = 0; i < npcSettings.Length; i++)
         {
@@ -81,6 +69,18 @@ public struct JsonLevel
             tile.name = settings.id;
             tile.movementSpeed = settings.speed;
             tile.transform.eulerAngles = settings.EulerAngles;
+        }
+    }
+    
+    private void ApplyLevelEvents(Level level)
+    {
+        level.LoadReferences();
+        level.events = new List<LevelEvent>();
+
+        // Populate LevelEvents using information from Json
+        foreach (JsonLevelEvent evt in events)
+        {
+            level.events.Add(evt.CreateFromJson(level));
         }
     }
 }
