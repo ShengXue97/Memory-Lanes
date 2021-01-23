@@ -92,46 +92,46 @@ public struct JsonLevelEvent
     // Note: Triggers and activators are counted separately
 
     // The id of the detected trigger
-    public int trigger;
+    public string trigger;
 
     // The ids of the affected activators
-    public int[] opens;
-    public int[] closes;
-    public int[] toggles;
+    public string[] opens;
+    public string[] closes;
+    public string[] toggles;
     
     public LevelEvent CreateFromJson(Level level)
     {
         LevelEvent levelEvent = new LevelEvent();
         levelEvent.triggerEvent = new TriggerEvent()
         {
-            trigger = level.triggers[trigger],
+            trigger = level.GetTrigger(trigger),
             action = TriggerAction.On,
         };
 
         levelEvent.activatorEvents = new List<ActivatorEvent>();
-        foreach (int activator in opens)
+        foreach (string activator in opens)
         {
             levelEvent.activatorEvents.Add(new ActivatorEvent()
             {
-                activator = level.activators[activator],
+                activator = level.GetActivator(activator),
                 action = ActivatorAction.On,
             });
         }
         
-        foreach (int activator in closes)
+        foreach (string activator in closes)
         {
             levelEvent.activatorEvents.Add(new ActivatorEvent()
             {
-                activator = level.activators[activator],
+                activator = level.GetActivator(activator),
                 action = ActivatorAction.Off,
             });
         }
         
-        foreach (int activator in toggles)
+        foreach (string activator in toggles)
         {
             levelEvent.activatorEvents.Add(new ActivatorEvent()
             {
-                activator = level.activators[activator],
+                activator = level.GetActivator(activator),
                 action = ActivatorAction.Toggle,
             });
         }
