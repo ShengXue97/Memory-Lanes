@@ -27,7 +27,12 @@ public class LevelManager : MonoBehaviour, ITriggerListener, IGoalListener
         currentLevelName = SceneManager.GetActiveScene().name;
     }
 
-    public void Start()
+    public void OnEnable()
+    {
+        LoadLevel();
+    }
+
+    public void LoadLevel()
     {
         audioManager.Music = level.music;
         audioManager.PlayMusic();
@@ -41,6 +46,26 @@ public class LevelManager : MonoBehaviour, ITriggerListener, IGoalListener
         }
 
         level.goal.SetListener(this);
+    }
+    
+    // Load Previous Scene
+    public void LoadPreviousLevel()
+    {
+        string levelName = levelDatabase.GetPreviousLevel(currentLevelName);
+        SceneManager.LoadScene(levelName);
+    }
+
+    // Load Next Scene
+    public void LoadNextLevel()
+    {
+        string levelName = levelDatabase.GetNextLevel(currentLevelName);
+        SceneManager.LoadScene(levelName);
+    }
+
+    // Reload current Scene
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(currentLevelName);
     }
 
     public void OnTriggerEvent(TriggerEvent triggerEvent)
@@ -113,26 +138,6 @@ public class LevelManager : MonoBehaviour, ITriggerListener, IGoalListener
         }
         isSaved = false;
         level.saveLoadIndicator.Load();
-    }
-
-    // Load Previous Scene
-    public void LoadPreviousLevel()
-    {
-        string levelName = levelDatabase.GetPreviousLevel(currentLevelName);
-        SceneManager.LoadScene(levelName);
-    }
-
-    // Load Next Scene
-    public void LoadNextLevel()
-    {
-        string levelName = levelDatabase.GetNextLevel(currentLevelName);
-        SceneManager.LoadScene(levelName);
-    }
-
-    // Reload current Scene
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene(currentLevelName);
     }
 
     public void DisablePlayer()
