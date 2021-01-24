@@ -12,13 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40679785ed5540318638a9415306732c, type: 3}
   m_Name: Level Database
   m_EditorClassIdentifier: 
-  levelNames:
-  - 1-level1
-  - 2-level2
-  - 3-level3
-  - 4-level4
-  - 5-level5
-  - 6-level6
-  - 7-level7
-  - 8-level8
-  - 9-level9
+  jsonFile: {fileID: 4900000, guid: 97be0612f010f4ec4b410b4c8144c781, type: 3}

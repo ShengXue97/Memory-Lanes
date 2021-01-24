@@ -5,33 +5,32 @@ using UnityEngine;
 public class LevelDatabase : ScriptableObject
 {
     [SerializeField]
-    private string[] levelNames;
-    private Dictionary<string, int> levelIdsByName;
+    private TextAsset jsonFile;
+    
+    private List<string> levels;
+    private Dictionary<string, int> levelNamesByNumber;
 
     private void OnEnable()
     {
-        levelIdsByName = new Dictionary<string, int>();
+        JsonLevelDatabase json = JsonUtility.FromJson<JsonLevelDatabase>(jsonFile.text);
+        levels = json.GetLevels();
 
-        if (levelNames == null)
+        levelNamesByNumber = new Dictionary<string, int>();
+        for (int i = 0; i < levels.Count; i++)
         {
-            return;
-        }
-        
-        for (int i = 0; i < levelNames.Length; i++)
-        {
-            levelIdsByName[levelNames[i]] = i;
+            levelNamesByNumber.Add(levels[i], i);   
         }
     }
-    
+
     public string GetPreviousLevel(string levelName)
     {
-        int levelId = levelIdsByName[levelName] - 1;
-        return levelNames[levelId];
+        int levelNumber = levelNamesByNumber[levelName] - 1;
+        return levels[levelNumber];
     }
 
     public string GetNextLevel(string levelName)
     {
-        int levelId = levelIdsByName[levelName] + 1;
-        return levelNames[levelId];
+        int levelNumber = levelNamesByNumber[levelName] + 1;
+        return levels[levelNumber];
     }
 }
