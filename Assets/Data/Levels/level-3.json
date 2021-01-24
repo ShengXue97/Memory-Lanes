@@ -1,0 +1,27 @@
+{
+    "name": "level-3",
+    "tilemap": "level-3.png",
+    "music": "bgm.mp3",
+
+    "tree": {"x": -2, "y": 0, "z": 3},
+
+    "triggerSettings": [
+        {"id": "B1"},
+        {"id": "B2"},
+        {"id": "B3"}
+    ],
+    "activatorSettings": [
+        {"id": "D1", "facing": "U", "on": false},
+        {"id": "D2", "facing": "U", "on": false},
+        {"id": "D3", "facing": "U", "on": false}
+    ],
+    "npcSettings": [
+        {"id": "E1", "facing": "D", "speed": 5}
+    ],
+
+    "events": [
+        {"trigger": "B1", "opens": ["D1"], "closes": ["D2"], "toggles": []},
+        {"trigger": "B2", "opens": ["D3"], "closes": [], "toggles": []},
+        {"trigger": "B3", "opens": ["D2"], "closes": ["D3"], "toggles": []}
+    ]
+}

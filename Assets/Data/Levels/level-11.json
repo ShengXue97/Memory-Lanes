@@ -1,0 +1,86 @@
+{
+    "name": "level-11",
+    "tilemap": "level-11.png",
+    "music": "bgm.mp3",
+    "events": [
+        {
+            "trigger": {"x": 8, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 8, "y": 10, "action": "On"},
+                {"x": 9, "y": 10, "action": "Off"},
+				{"x": 7, "y": 9, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 9, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 8, "y": 11, "action": "On"},
+                {"x": 8, "y": 10, "action": "Off"},
+				{"x": 9, "y": 10, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 9, "y": 8, "action": "On"},
+            "activators": [
+                {"x": 9, "y": 10, "action": "On"},
+                {"x": 8, "y": 10, "action": "Off"},
+				{"x": 8, "y": 11, "action": "Off"},
+				{"x": 9, "y": 7, "action": "Off"},
+                {"x": 9, "y": 6, "action": "Off"},
+				{"x": 8, "y": 7, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 1, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 8, "y": 7, "action": "On"},
+                {"x": 9, "y": 7, "action": "Off"},
+				{"x": 9, "y": 6, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 1, "y": 8, "action": "On"},
+            "activators": [
+                {"x": 9, "y": 7, "action": "On"},
+                {"x": 8, "y": 7, "action": "Off"},
+				{"x": 9, "y": 6, "action": "Off"},
+				{"x": 8, "y": 10, "action": "Off"},
+                {"x": 8, "y": 11, "action": "Off"},
+				{"x": 10, "y": 9, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 8, "y": 16, "action": "On"},
+            "activators": [
+                {"x": 7, "y": 9, "action": "On"},
+                {"x": 6, "y": 9, "action": "On"},
+				{"x": 7, "y": 8, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 9, "y": 16, "action": "On"},
+            "activators": [
+                {"x": 7, "y": 8, "action": "On"},
+                {"x": 7, "y": 9, "action": "Off"},
+				{"x": 6, "y": 9, "action": "Off"},
+				{"x": 10, "y": 9, "action": "On"},
+                {"x": 11, "y": 9, "action": "On"}
+            ]
+        },
+		{
+            "trigger": {"x": 16, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 9, "y": 6, "action": "On"},
+                {"x": 8, "y": 7, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 16, "y": 8, "action": "On"},
+            "activators": [
+                {"x": 8, "y": 7, "action": "On"},
+                {"x": 9, "y": 7, "action": "Off"},
+				{"x": 9, "y": 6, "action": "Off"}
+            ]
+        }
+    ]
+}

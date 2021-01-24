@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
             control.Load();
         }
 
+
+        // print(joystick.Horizontal + ";" + joystick.Vertical);
         float pointer_x = Input.GetAxisRaw("Horizontal");
         float pointer_y = Input.GetAxisRaw("Vertical");
         // if (Mathf.Abs(joystick.Horizontal) > 0.2f)

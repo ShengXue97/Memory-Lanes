@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1631128290186582730}
   - component: {fileID: 4038359032365736066}
   - component: {fileID: 6121110418023736253}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Switch
   m_TagString: Switch
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 9135918289764670493}
   - component: {fileID: 7483246611872148646}
   - component: {fileID: 8601649877241664063}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OuterCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 3999430449148910927}
   - component: {fileID: 7700124421200422650}
   - component: {fileID: 207652621645943619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InnerCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

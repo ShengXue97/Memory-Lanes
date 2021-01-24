@@ -448,7 +448,7 @@ SpriteRenderer:
   m_Size: {x: 12.8, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7139826700853227926
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf288923b4bf4c418b14029658cdbcb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33baaefbfbb4049e5811f3b3f8526a02, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

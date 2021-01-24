@@ -1,0 +1,68 @@
+{
+    "name": "level-10",
+    "tilemap": "level-10.png",
+    "music": "bgm.mp3",
+    "events": [
+        {
+            "trigger": {"x": 1, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 1, "y": 11, "action": "On"},
+                {"x": 3, "y": 8, "action": "On"},
+				{"x": 2, "y": 10, "action": "Off"},
+				{"x": 3, "y": 9, "action": "Off"},
+				{"x": 4, "y": 9, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 2, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 2, "y": 10, "action": "On"},
+				{"x": 1, "y": 10, "action": "Off"},
+				{"x": 1, "y": 11, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 2, "y": 8, "action": "On"},
+            "activators": [
+                {"x": 1, "y": 10, "action": "On"},
+				{"x": 1, "y": 7, "action": "On"},
+				{"x": 2, "y": 10, "action": "Off"},
+				{"x": 1, "y": 11, "action": "Off"},
+				{"x": 2, "y": 7, "action": "Off"},
+				{"x": 2, "y": 6, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 1, "y": 16, "action": "On"},
+            "activators": [
+                {"x": 3, "y": 9, "action": "On"},
+				{"x": 4, "y": 9, "action": "On"},
+				{"x": 3, "y": 8, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 2, "y": 16, "action": "On"},
+            "activators": [
+                {"x": 2, "y": 6, "action": "On"},
+				{"x": 1, "y": 7, "action": "Off"},
+				{"x": 2, "y": 7, "action": "Off"},
+				{"x": 3, "y": 9, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 9, "y": 9, "action": "On"},
+            "activators": [
+                {"x": 2, "y": 7, "action": "On"},
+				{"x": 1, "y": 7, "action": "Off"}
+            ]
+        },
+		{
+            "trigger": {"x": 9, "y": 8, "action": "On"},
+            "activators": [
+                {"x": 1, "y": 7, "action": "On"},
+				{"x": 2, "y": 7, "action": "Off"},
+				{"x": 2, "y": 6, "action": "Off"}
+            ]
+        }
+    ]
+}
