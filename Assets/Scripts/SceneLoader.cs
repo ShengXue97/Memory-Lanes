@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     public GameObject LevelSelector;
     public GameObject LevelContent;
     private string starprogress = "";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,12 +103,6 @@ public class SceneLoader : MonoBehaviour
 
             currentLevel++;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void LoadScene(string scene)
