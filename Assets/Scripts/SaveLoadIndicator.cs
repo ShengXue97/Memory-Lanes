@@ -32,18 +32,19 @@ public class SaveLoadIndicator : MonoBehaviour
     private bool isSaved = false;
     private RaycastHit hit;
     private Material[] materials;
-    private int saveCount = 0;
+    public int saveCount = 0;
     // Start is called before the first frame update
     void Start()
     {
         isSaved = false;
-        
+        Debug.Log(gameObject.name);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -51,7 +52,7 @@ public class SaveLoadIndicator : MonoBehaviour
                 if (hit.collider.gameObject.tag == "loadIndicator") Load();
                 else if (hit.collider.gameObject.tag == "saveIndicator") Save();
             }
-        } 
+        }
     }
 
     public void Save()
@@ -70,7 +71,7 @@ public class SaveLoadIndicator : MonoBehaviour
 
     public void Load()
     {
-        if(isSaved)
+        if (isSaved)
         {
             player.loadState();
             materials = indicatorMesh.GetComponent<Renderer>().materials;
@@ -80,6 +81,6 @@ public class SaveLoadIndicator : MonoBehaviour
             effectLoad.gameObject.SetActive(true);
             effectLoad.Play();
             isSaved = false;
-        }  
+        }
     }
 }
