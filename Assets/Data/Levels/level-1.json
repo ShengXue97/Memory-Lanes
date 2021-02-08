@@ -1,0 +1,18 @@
+{
+    "name": "level-1",
+    "tilemap": "level-1.png",
+    "music": "bgm.mp3",
+    
+    "triggerSettings": [
+        {"id": "B1"}
+    ],
+    "activatorSettings": [
+        {"id": "D1", "facing": "U", "on": true},
+        {"id": "D2", "facing": "L", "on": false}
+    ],
+    "npcSettings": [],
+
+    "events": [
+        {"trigger": "B1", "opens": [], "closes": [], "toggles": ["D1", "D2"]}
+    ]
+}

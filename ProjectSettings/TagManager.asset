@@ -12,6 +12,7 @@ TagManager:
   - saveIndicator
   - loadIndicator
   - Music
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -21,11 +22,11 @@ TagManager:
   - UI
   - 
   - 
-  - Floor
-  - NPC
-  - Ground
-  - Ignore
-  - 
+  - Boundary
+  - Path
+  - Triggers
+  - Activators
+  - Agents
   - 
   - 
   - 

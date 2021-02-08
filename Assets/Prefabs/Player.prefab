@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2479041437709149663}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6842154799183300362}
   - component: {fileID: 2802263654257020243}
   - component: {fileID: 2984210721831550122}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: aPlayer
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   movePoint: {fileID: 2479041437709149663}
   whatStopsMovement:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6400
 --- !u!136 &2984210721831550122
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -204,6 +204,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f9385159728427749accd8f649b87cc7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 151555708559660996, guid: f9385159728427749accd8f649b87cc7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291006488609559945, guid: f9385159728427749accd8f649b87cc7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977819192417808284, guid: f9385159728427749accd8f649b87cc7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9385159728427749accd8f649b87cc7, type: 3}
