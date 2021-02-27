@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,16 +23,15 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private AudioClip audioClip;
 
+    private string PLAYER_MIN_SAVES_KEY = "playerMinSaves";
     private bool isExiting;
     private double exitingTimeLeft;
 
-    // Start is called before the first frame update
     void Start()
     {
         exitingTimeLeft = exitingTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isRotating)
@@ -44,67 +44,23 @@ public class Goal : MonoBehaviour
         }
         if (exitingTimeLeft < 0)
         {
-            string starprogress = "-1;-1;-1;-1;-1;-1;-1;-1;-1;-1";
+            // Retrieve playerMinSaves
+            string playerMinSaves = PlayerPrefs.GetString(PLAYER_MIN_SAVES_KEY);
+            string[] minSaves = playerMinSaves.Split(';');
+            GameObject SaveIndicator = GameObject.FindGameObjectWithTag("saveIndicator");
+            int saveCount = SaveIndicator.GetComponent<SaveLoadIndicator>().saveCount;
 
-            if (PlayerPrefs.HasKey("starprogress"))
-            {
-                starprogress = PlayerPrefs.GetString("starprogress");
-            }
-            string[] starSplit = starprogress.Split(';');
-            int currentLevel = 1;
-            string newStarProgress = "";
+            // Update the min save count
+            string prevSave = minSaves[currentScene - 1];
+            if (saveCount < int.Parse(prevSave) || prevSave == "0" || prevSave == "-1")
+                minSaves[currentScene-1] = saveCount.ToString();
 
-            foreach (string star in starSplit)
-            {
-                if (currentLevel == currentScene)
-                {
-                    GameObject SaveIndicator = GameObject.FindGameObjectWithTag("saveIndicator");
-                    int saveCount = SaveIndicator.GetComponent<SaveLoadIndicator>().saveCount;
-                    int newScore = 0;
-                    if (saveCount <= 1)
-                    {
-                        newScore = 3;
-                    }
-                    else if (saveCount <= 2)
-                    {
-                        newScore = 2;
-                    }
-                    else
-                    {
-                        newScore = 1;
-                    }
-                    int oldScore = int.Parse(star);
+            // Unlock the next level
+            if (currentScene < minSaves.Length)
+                minSaves[currentScene] = "0";
 
-                    if (newScore > oldScore)
-                    {
-                        newStarProgress += newScore.ToString() + ";";
-                    }
-                    else
-                    {
-                        newStarProgress += oldScore.ToString() + ";";
-                    }
-                }
-                else if (currentLevel == currentScene + 1)
-                {
-                    if (star == "-1")
-                    {
-                        newStarProgress += "0;";
-                    }
-                    else
-                    {
-                        newStarProgress += star + ";";
-                    }
-
-                }
-                else
-                {
-                    newStarProgress += star + ";";
-                }
-
-                currentLevel++;
-            }
-            newStarProgress = newStarProgress.Substring(0, newStarProgress.Length - 1);
-            PlayerPrefs.SetString("starprogress", newStarProgress);
+            playerMinSaves = string.Join(";", minSaves);
+            PlayerPrefs.SetString(PLAYER_MIN_SAVES_KEY, playerMinSaves);
 
             SceneManager.LoadScene(nextSceneName);
         }
