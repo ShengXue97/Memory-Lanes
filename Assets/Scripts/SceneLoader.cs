@@ -68,21 +68,22 @@ public class SceneLoader : MonoBehaviour
     // -1 indicates the level is locked, 0 indicates the level is unlocked but not attempted
     private void GetPlayerProgress()
     {
+        string existingPlayerMinSaves = "0;";
         if (PlayerPrefs.HasKey(PLAYER_MIN_SAVES_KEY))
-        {
-            playerMinSaves = PlayerPrefs.GetString(PLAYER_MIN_SAVES_KEY);
-        }
-        else
-        {
-            PlayerPrefs.SetString(PLAYER_MIN_SAVES_KEY, playerMinSaves);
-        }
+            existingPlayerMinSaves = PlayerPrefs.GetString(PLAYER_MIN_SAVES_KEY);
+
+        // use existing playerMinSaves only if it is consistent with numLevels, otherwise reset progress
+        if (existingPlayerMinSaves.Split(';').Length == playerMinSaves.Split(';').Length)
+            playerMinSaves = existingPlayerMinSaves;
+
+        PlayerPrefs.SetString(PLAYER_MIN_SAVES_KEY, playerMinSaves);
     }
 
 
-    // Populate menu stars according to playerMinSaves and savesRequired
-    private void PopulateStars()
+    // Populate menu and stars according to playerMinSaves and savesRequired
+    private void PopulateMenu()
     {
-        int[] minSaves = Array.ConvertAll(playerMinSaves.Split(';'), s=> int.Parse(s));
+        int[] minSaves = Array.ConvertAll<string, int>(playerMinSaves.Substring(0, playerMinSaves.Length-1).Split(';'), int.Parse);
         int currentLevel = 1;
         foreach (int saves in minSaves)
         {
@@ -154,7 +155,7 @@ public class SceneLoader : MonoBehaviour
         ParseStarInfo();
         InitPlayerMinSaves();
         GetPlayerProgress();
-        PopulateStars();
+        PopulateMenu();
     }
 
     public void LoadScene(string scene)

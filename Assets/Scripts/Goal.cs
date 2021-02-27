@@ -23,6 +23,7 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private AudioClip audioClip;
 
+    private string PLAYER_MIN_SAVES_KEY = "playerMinSaves";
     private bool isExiting;
     private double exitingTimeLeft;
 
@@ -43,12 +44,8 @@ public class Goal : MonoBehaviour
         }
         if (exitingTimeLeft < 0)
         {
-            string playerMinSaves = "0;-1;-1;-1;-1;-1;-1;-1;-1;-1"; // stores save information for every level, -1 indicates uncompleted
-
-            if (PlayerPrefs.HasKey("playerMinSaves"))
-            {
-                playerMinSaves = PlayerPrefs.GetString("playerMinSaves");
-            }
+            // Retrieve playerMinSaves
+            string playerMinSaves = PlayerPrefs.GetString(PLAYER_MIN_SAVES_KEY);
             string[] minSaves = playerMinSaves.Split(';');
             GameObject SaveIndicator = GameObject.FindGameObjectWithTag("saveIndicator");
             int saveCount = SaveIndicator.GetComponent<SaveLoadIndicator>().saveCount;
@@ -63,8 +60,7 @@ public class Goal : MonoBehaviour
                 minSaves[currentScene] = "0";
 
             playerMinSaves = string.Join(";", minSaves);
-            //Debug.Log(playerMinSaves);
-            PlayerPrefs.SetString("playerMinSaves", playerMinSaves);
+            PlayerPrefs.SetString(PLAYER_MIN_SAVES_KEY, playerMinSaves);
 
             SceneManager.LoadScene(nextSceneName);
         }
